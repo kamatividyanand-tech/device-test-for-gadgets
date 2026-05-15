@@ -92,7 +92,7 @@ header{
     transform:translateY(-5px);
 }
 
-/* FULLSCREEN SCREEN TEST */
+/* FULLSCREEN DISPLAY TEST */
 
 #screenTest{
     width:100vw;
@@ -101,14 +101,14 @@ header{
     cursor:pointer;
 }
 
-/* INFO */
+/* DISPLAY INFO */
 
 #screenInfo{
     position:fixed;
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.5);
     padding:10px 20px;
     border-radius:10px;
     font-size:14px;
@@ -116,7 +116,7 @@ header{
     z-index:1000;
 }
 
-/* TEST SECTIONS */
+/* SECTION */
 
 .section{
     display:none;
@@ -141,7 +141,7 @@ header{
     display:grid;
     grid-template-columns:repeat(10,1fr);
     gap:10px;
-    max-width:1000px;
+    max-width:1100px;
     margin:auto;
 }
 
@@ -151,11 +151,42 @@ header{
     border-radius:10px;
     border:1px solid #333;
     transition:0.2s;
+    font-weight:bold;
 }
 
 .active{
     background:#00ff99;
     color:black;
+    transform:scale(1.05);
+}
+
+/* BUTTONS */
+
+.action-btn{
+    margin-top:30px;
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:#00ff99;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.action-btn:hover{
+    transform:scale(1.05);
+}
+
+/* IMAGE */
+
+#captureImage{
+    margin-top:30px;
+    max-width:90%;
+    border-radius:15px;
+    border:2px solid #00ff99;
+    display:none;
 }
 
 /* BATTERY */
@@ -174,7 +205,7 @@ header{
     color:#00ff99;
 }
 
-/* TOUCH SCREEN */
+/* TOUCH */
 
 .touch-area{
     width:100%;
@@ -230,13 +261,13 @@ Created by Vidyanand Kamati
 <h1>Device Testing Website</h1>
 
 <p>
-Free online tools to test your laptop, PC and mobile device hardware directly from your browser.
+Free online tools to test your laptop, PC and mobile hardware directly from your browser.
 </p>
 
 <div class="tools">
 
 <button class="tool-btn" onclick="startScreenTest()">
-Screen Test
+Display Test
 </button>
 
 <button class="tool-btn" onclick="openKeyboardTest()">
@@ -247,10 +278,6 @@ Keyboard Test
 Battery Info
 </button>
 
-<button class="tool-btn" onclick="openSSDTest()">
-SSD Health
-</button>
-
 <button class="tool-btn" onclick="openTouchTest()">
 Touch Screen Test
 </button>
@@ -259,7 +286,7 @@ Touch Screen Test
 
 </section>
 
-<!-- SCREEN TEST -->
+<!-- DISPLAY TEST -->
 
 <div id="screenTest"></div>
 
@@ -273,7 +300,9 @@ Click / Space = Next Color | ESC = Exit
 
 <h2>Keyboard Tester</h2>
 
-<p>Press any key to test your keyboard.</p>
+<p>
+Press all keys on your keyboard to test them.
+</p>
 
 <div class="keyboard">
 
@@ -306,7 +335,30 @@ Click / Space = Next Color | ESC = Exit
 <div class="key" data-key="N">N</div>
 <div class="key" data-key="M">M</div>
 
+<div class="key" data-key="1">1</div>
+<div class="key" data-key="2">2</div>
+<div class="key" data-key="3">3</div>
+<div class="key" data-key="4">4</div>
+<div class="key" data-key="5">5</div>
+<div class="key" data-key="6">6</div>
+<div class="key" data-key="7">7</div>
+<div class="key" data-key="8">8</div>
+<div class="key" data-key="9">9</div>
+<div class="key" data-key="0">0</div>
+
+<div class="key" data-key=" ">SPACE</div>
+
 </div>
+
+<button class="action-btn" onclick="captureKeyboardProof()">
+Capture Keyboard Proof
+</button>
+
+<br>
+
+<canvas id="keyboardCanvas" style="display:none;"></canvas>
+
+<img id="captureImage">
 
 </section>
 
@@ -316,49 +368,33 @@ Click / Space = Next Color | ESC = Exit
 
 <h2>Battery Information</h2>
 
-<p>Real-time battery details.</p>
-
-<div class="info-box">
-
-<h3 id="batteryLevel">Battery Level: Loading...</h3>
-
-<h3 id="chargingStatus">Charging Status: Loading...</h3>
-
-</div>
-
-</section>
-
-<!-- SSD -->
-
-<section class="section" id="ssdSection">
-
-<h2>SSD Health Checker</h2>
-
 <p>
-Browser security restrictions prevent full SSD health detection.
+Live battery details from your device.
 </p>
 
 <div class="info-box">
 
-<h3>
-SSD Status: Browser Access Restricted
+<h3 id="batteryLevel">
+Battery Level: Loading...
 </h3>
 
-<h3>
-Use CrystalDiskInfo software for full SSD health check.
+<h3 id="chargingStatus">
+Charging Status: Loading...
 </h3>
 
 </div>
 
 </section>
 
-<!-- TOUCH TEST -->
+<!-- TOUCH -->
 
 <section class="section" id="touchSection">
 
-<h2>Touch Screen Tester</h2>
+<h2>Touch Screen Test</h2>
 
-<p>Touch anywhere on screen to test multi-touch response.</p>
+<p>
+Touch anywhere to test screen response.
+</p>
 
 <div class="touch-area" id="touchArea"></div>
 
@@ -372,7 +408,7 @@ Use CrystalDiskInfo software for full SSD health check.
 
 <script>
 
-/* SCREEN TEST */
+/* DISPLAY TEST */
 
 const colors = [
 "#000000",
@@ -390,7 +426,7 @@ let current = 0;
 const screen = document.getElementById("screenTest");
 const info = document.getElementById("screenInfo");
 
-function hideAllSections(){
+function hideAll(){
 
 document.querySelectorAll(".section").forEach(sec=>{
 sec.style.display="none";
@@ -408,7 +444,7 @@ document.getElementById("home").style.display="flex";
 
 function startScreenTest(){
 
-hideAllSections();
+hideAll();
 
 screen.style.display="block";
 info.style.display="block";
@@ -457,7 +493,7 @@ showHome();
 
 function openKeyboardTest(){
 
-hideAllSections();
+hideAll();
 
 document.getElementById("keyboardSection").style.display="block";
 
@@ -473,13 +509,29 @@ if(target){
 
 target.classList.add("active");
 
-setTimeout(()=>{
-target.classList.remove("active");
-},300);
-
 }
 
 });
+
+/* KEYBOARD PROOF */
+
+function captureKeyboardProof(){
+
+const keyboard=document.querySelector(".keyboard");
+
+html2canvas(keyboard).then(canvas=>{
+
+const image=canvas.toDataURL("image/png");
+
+const img=document.getElementById("captureImage");
+
+img.src=image;
+
+img.style.display="block";
+
+});
+
+}
 
 /* BATTERY */
 
@@ -513,7 +565,7 @@ battery.addEventListener('chargingchange',updateBattery);
 
 function openBatteryTest(){
 
-hideAllSections();
+hideAll();
 
 document.getElementById("batterySection").style.display="block";
 
@@ -521,21 +573,11 @@ getBatteryInfo();
 
 }
 
-/* SSD */
-
-function openSSDTest(){
-
-hideAllSections();
-
-document.getElementById("ssdSection").style.display="block";
-
-}
-
 /* TOUCH */
 
 function openTouchTest(){
 
-hideAllSections();
+hideAll();
 
 document.getElementById("touchSection").style.display="block";
 
@@ -566,6 +608,8 @@ point.remove();
 });
 
 </script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 </body>
 </html>
