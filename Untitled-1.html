@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dead Pixel Tester</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+    }
+
+    body{
+        background:#111;
+        color:white;
+        overflow:hidden;
+    }
+
+    #intro{
+        position:absolute;
+        width:100%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        padding:20px;
+        background:#111;
+        z-index:10;
+    }
+
+    h1{
+        font-size:50px;
+        margin-bottom:20px;
+    }
+
+    p{
+        max-width:800px;
+        line-height:1.8;
+        font-size:18px;
+    }
+
+    button{
+        margin-top:30px;
+        padding:15px 40px;
+        font-size:20px;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
+        background:#00ff99;
+        color:black;
+        font-weight:bold;
+        transition:0.3s;
+    }
+
+    button:hover{
+        transform:scale(1.05);
+    }
+
+    #screen{
+        width:100vw;
+        height:100vh;
+        display:none;
+        cursor:pointer;
+    }
+
+    #info{
+        position:fixed;
+        bottom:20px;
+        left:50%;
+        transform:translateX(-50%);
+        background:rgba(0,0,0,0.5);
+        padding:10px 20px;
+        border-radius:10px;
+        font-size:14px;
+        z-index:100;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <h1>Dead Pixel Tester</h1>
+
+    <p>
+        Check your monitor, laptop, TV or mobile display for dead or stuck pixels.
+        Click Start Test and inspect every color carefully.
+        Press Space or Click to switch colors.
+        Press ESC to exit fullscreen.
+    </p>
+
+    <button onclick="startTest()">Start Test</button>
+</div>
+
+<div id="screen"></div>
+
+<div id="info">
+    Click / Space = Next Color | ESC = Exit
+</div>
+
+<script>
+
+const colors = [
+    "#000000",
+    "#FFFFFF",
+    "#FF0000",
+    "#00FF00",
+    "#0000FF",
+    "#FFFF00",
+    "#00FFFF",
+    "#FF00FF"
+];
+
+let current = 0;
+
+const screen = document.getElementById("screen");
+const intro = document.getElementById("intro");
+
+function startTest(){
+
+    intro.style.display = "none";
+    screen.style.display = "block";
+
+    if(document.documentElement.requestFullscreen){
+        document.documentElement.requestFullscreen();
+    }
+
+    changeColor();
+}
+
+function changeColor(){
+    screen.style.background = colors[current];
+    current = (current + 1) % colors.length;
+}
+
+screen.addEventListener("click", changeColor);
+
+document.addEventListener("keydown", function(e){
+
+    if(e.code === "Space"){
+        e.preventDefault();
+        changeColor();
+    }
+
+    if(e.code === "Escape"){
+        intro.style.display = "flex";
+        screen.style.display = "none";
+    }
+});
+
+</script>
+
+</body>
+</html>
