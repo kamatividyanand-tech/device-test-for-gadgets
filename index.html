@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Device Test Hub | Created by Vidyanand Kamati</title>
-
-<meta name="description" content="Free online Dead Pixel Tester and Keyboard Tester for laptops, PCs and mobile devices.">
+<title>Device Test Hub</title>
 
 <style>
 
@@ -14,7 +12,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -25,94 +23,87 @@ body{
 /* HEADER */
 
 header{
-    width:100%;
-    padding:15px 30px;
     background:#151515;
+    padding:15px 25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     border-bottom:1px solid #333;
-    position:sticky;
-    top:0;
-    z-index:1000;
 }
 
 .logo{
     font-size:28px;
-    font-weight:bold;
     color:#00ff99;
+    font-weight:bold;
 }
 
 .creator{
-    color:#bbb;
-    font-size:15px;
+    color:#999;
+    font-size:14px;
 }
 
-/* HERO */
+/* HOME */
 
-.hero{
+.home{
     min-height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:20px;
+    padding:30px;
 }
 
-.hero h1{
+.home h1{
     font-size:60px;
     margin-bottom:20px;
 }
 
-.hero p{
-    max-width:800px;
-    line-height:1.8;
+.home p{
+    max-width:850px;
     color:#ccc;
-    font-size:18px;
+    line-height:1.8;
+    margin-bottom:40px;
 }
 
-.buttons{
-    margin-top:35px;
-    display:flex;
+.tools{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
-    flex-wrap:wrap;
+    width:100%;
+    max-width:1100px;
 }
 
-button{
-    padding:15px 35px;
-    border:none;
-    border-radius:12px;
+.tool-btn{
+    background:#1d1d1d;
+    border:1px solid #333;
+    color:white;
+    padding:25px;
+    border-radius:15px;
     cursor:pointer;
+    transition:0.3s;
     font-size:18px;
     font-weight:bold;
-    transition:0.3s;
 }
 
-.dead-btn{
+.tool-btn:hover{
     background:#00ff99;
     color:black;
+    transform:translateY(-5px);
 }
 
-.keyboard-btn{
-    background:#0066ff;
-    color:white;
-}
+/* FULLSCREEN SCREEN TEST */
 
-button:hover{
-    transform:scale(1.05);
-}
-
-/* DEAD PIXEL SCREEN */
-
-#screen{
+#screenTest{
     width:100vw;
     height:100vh;
     display:none;
     cursor:pointer;
 }
 
-#info{
+/* INFO */
+
+#screenInfo{
     position:fixed;
     bottom:20px;
     left:50%;
@@ -121,50 +112,87 @@ button:hover{
     padding:10px 20px;
     border-radius:10px;
     font-size:14px;
-    z-index:100;
     display:none;
+    z-index:1000;
 }
 
-/* KEYBOARD TEST */
+/* TEST SECTIONS */
 
-.keyboard-section{
+.section{
     display:none;
-    padding:40px 20px;
-    text-align:center;
+    padding:60px 20px;
     min-height:100vh;
+    text-align:center;
 }
 
-.keyboard-section h2{
+.section h2{
     font-size:45px;
     margin-bottom:20px;
 }
 
-.keyboard-section p{
+.section p{
     color:#ccc;
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
+/* KEYBOARD */
+
 .keyboard{
-    max-width:1100px;
-    margin:auto;
     display:grid;
     grid-template-columns:repeat(10,1fr);
     gap:10px;
+    max-width:1000px;
+    margin:auto;
 }
 
 .key{
     padding:20px;
     background:#1d1d1d;
-    border:1px solid #333;
     border-radius:10px;
+    border:1px solid #333;
     transition:0.2s;
-    font-weight:bold;
 }
 
 .active{
     background:#00ff99;
     color:black;
-    transform:scale(1.05);
+}
+
+/* BATTERY */
+
+.info-box{
+    max-width:500px;
+    margin:auto;
+    background:#1d1d1d;
+    padding:40px;
+    border-radius:20px;
+    border:1px solid #333;
+}
+
+.info-box h3{
+    margin:20px 0;
+    color:#00ff99;
+}
+
+/* TOUCH SCREEN */
+
+.touch-area{
+    width:100%;
+    height:70vh;
+    background:#1a1a1a;
+    border:2px dashed #444;
+    border-radius:20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.touch-point{
+    width:40px;
+    height:40px;
+    background:#00ff99;
+    border-radius:50%;
+    position:absolute;
+    transform:translate(-50%,-50%);
 }
 
 /* FOOTER */
@@ -172,8 +200,8 @@ button:hover{
 footer{
     text-align:center;
     padding:20px;
-    border-top:1px solid #333;
     color:#888;
+    border-top:1px solid #333;
 }
 
 </style>
@@ -195,50 +223,59 @@ Created by Vidyanand Kamati
 
 </header>
 
-<!-- HERO -->
+<!-- HOME -->
 
-<section class="hero" id="home">
+<section class="home" id="home">
 
 <h1>Device Testing Website</h1>
 
 <p>
-Test your laptop, monitor, keyboard and display online for free.
-Use our advanced Dead Pixel Tester and Keyboard Test Tool easily on any device.
+Free online tools to test your laptop, PC and mobile device hardware directly from your browser.
 </p>
 
-<div class="buttons">
+<div class="tools">
 
-<button class="dead-btn" onclick="startDeadPixelTest()">
-Start Dead Pixel Test
+<button class="tool-btn" onclick="startScreenTest()">
+Screen Test
 </button>
 
-<button class="keyboard-btn" onclick="openKeyboardTest()">
-Start Keyboard Test
+<button class="tool-btn" onclick="openKeyboardTest()">
+Keyboard Test
+</button>
+
+<button class="tool-btn" onclick="openBatteryTest()">
+Battery Info
+</button>
+
+<button class="tool-btn" onclick="openSSDTest()">
+SSD Health
+</button>
+
+<button class="tool-btn" onclick="openTouchTest()">
+Touch Screen Test
 </button>
 
 </div>
 
 </section>
 
-<!-- DEAD PIXEL TEST -->
+<!-- SCREEN TEST -->
 
-<div id="screen"></div>
+<div id="screenTest"></div>
 
-<div id="info">
+<div id="screenInfo">
 Click / Space = Next Color | ESC = Exit
 </div>
 
 <!-- KEYBOARD TEST -->
 
-<section class="keyboard-section" id="keyboardSection">
+<section class="section" id="keyboardSection">
 
 <h2>Keyboard Tester</h2>
 
-<p>
-Press any key on your keyboard to test if it is working properly.
-</p>
+<p>Press any key to test your keyboard.</p>
 
-<div class="keyboard" id="keyboard">
+<div class="keyboard">
 
 <div class="key" data-key="Q">Q</div>
 <div class="key" data-key="W">W</div>
@@ -268,21 +305,74 @@ Press any key on your keyboard to test if it is working properly.
 <div class="key" data-key="B">B</div>
 <div class="key" data-key="N">N</div>
 <div class="key" data-key="M">M</div>
-<div class="key" data-key=" ">SPACE</div>
 
 </div>
+
+</section>
+
+<!-- BATTERY -->
+
+<section class="section" id="batterySection">
+
+<h2>Battery Information</h2>
+
+<p>Real-time battery details.</p>
+
+<div class="info-box">
+
+<h3 id="batteryLevel">Battery Level: Loading...</h3>
+
+<h3 id="chargingStatus">Charging Status: Loading...</h3>
+
+</div>
+
+</section>
+
+<!-- SSD -->
+
+<section class="section" id="ssdSection">
+
+<h2>SSD Health Checker</h2>
+
+<p>
+Browser security restrictions prevent full SSD health detection.
+</p>
+
+<div class="info-box">
+
+<h3>
+SSD Status: Browser Access Restricted
+</h3>
+
+<h3>
+Use CrystalDiskInfo software for full SSD health check.
+</h3>
+
+</div>
+
+</section>
+
+<!-- TOUCH TEST -->
+
+<section class="section" id="touchSection">
+
+<h2>Touch Screen Tester</h2>
+
+<p>Touch anywhere on screen to test multi-touch response.</p>
+
+<div class="touch-area" id="touchArea"></div>
 
 </section>
 
 <!-- FOOTER -->
 
 <footer>
-© 2026 Device Test Hub | Created by Vidyanand Kamati
+© 2026 Device Test Hub
 </footer>
 
 <script>
 
-/* DEAD PIXEL TEST */
+/* SCREEN TEST */
 
 const colors = [
 "#000000",
@@ -297,13 +387,28 @@ const colors = [
 
 let current = 0;
 
-const screen = document.getElementById("screen");
-const info = document.getElementById("info");
+const screen = document.getElementById("screenTest");
+const info = document.getElementById("screenInfo");
 
-function startDeadPixelTest(){
+function hideAllSections(){
+
+document.querySelectorAll(".section").forEach(sec=>{
+sec.style.display="none";
+});
 
 document.getElementById("home").style.display="none";
-document.getElementById("keyboardSection").style.display="none";
+
+}
+
+function showHome(){
+
+document.getElementById("home").style.display="flex";
+
+}
+
+function startScreenTest(){
+
+hideAllSections();
 
 screen.style.display="block";
 info.style.display="block";
@@ -313,11 +418,15 @@ document.documentElement.requestFullscreen();
 }
 
 changeColor();
+
 }
 
 function changeColor(){
+
 screen.style.background=colors[current];
+
 current=(current+1)%colors.length;
+
 }
 
 screen.addEventListener("click",changeColor);
@@ -336,8 +445,10 @@ if(e.code==="Escape"){
 screen.style.display="none";
 info.style.display="none";
 
-document.getElementById("home").style.display="flex";
+showHome();
+
 }
+
 }
 
 });
@@ -346,9 +457,10 @@ document.getElementById("home").style.display="flex";
 
 function openKeyboardTest(){
 
-document.getElementById("home").style.display="none";
+hideAllSections();
 
 document.getElementById("keyboardSection").style.display="block";
+
 }
 
 document.addEventListener("keydown",function(e){
@@ -364,6 +476,90 @@ target.classList.add("active");
 setTimeout(()=>{
 target.classList.remove("active");
 },300);
+
+}
+
+});
+
+/* BATTERY */
+
+async function getBatteryInfo(){
+
+if('getBattery' in navigator){
+
+const battery=await navigator.getBattery();
+
+function updateBattery(){
+
+document.getElementById("batteryLevel").innerText=
+"Battery Level: "+Math.floor(battery.level*100)+"%";
+
+document.getElementById("chargingStatus").innerText=
+battery.charging
+? "Charging Status: Charging ⚡"
+: "Charging Status: Not Charging";
+
+}
+
+updateBattery();
+
+battery.addEventListener('levelchange',updateBattery);
+
+battery.addEventListener('chargingchange',updateBattery);
+
+}
+
+}
+
+function openBatteryTest(){
+
+hideAllSections();
+
+document.getElementById("batterySection").style.display="block";
+
+getBatteryInfo();
+
+}
+
+/* SSD */
+
+function openSSDTest(){
+
+hideAllSections();
+
+document.getElementById("ssdSection").style.display="block";
+
+}
+
+/* TOUCH */
+
+function openTouchTest(){
+
+hideAllSections();
+
+document.getElementById("touchSection").style.display="block";
+
+}
+
+const touchArea=document.getElementById("touchArea");
+
+touchArea.addEventListener("touchstart",function(e){
+
+for(let touch of e.touches){
+
+const point=document.createElement("div");
+
+point.className="touch-point";
+
+point.style.left=touch.clientX+"px";
+
+point.style.top=touch.clientY+"px";
+
+touchArea.appendChild(point);
+
+setTimeout(()=>{
+point.remove();
+},500);
 
 }
 
