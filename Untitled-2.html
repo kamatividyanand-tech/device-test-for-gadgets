@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Device Test Hub | Created by Vidyanand Kamati</title>
+
+<meta name="description" content="Free online Dead Pixel Tester and Keyboard Tester for laptops, PCs and mobile devices.">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+}
+
+/* HEADER */
+
+header{
+    width:100%;
+    padding:15px 30px;
+    background:#151515;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #333;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#00ff99;
+}
+
+.creator{
+    color:#bbb;
+    font-size:15px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:800px;
+    line-height:1.8;
+    color:#ccc;
+    font-size:18px;
+}
+
+.buttons{
+    margin-top:35px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+button{
+    padding:15px 35px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.dead-btn{
+    background:#00ff99;
+    color:black;
+}
+
+.keyboard-btn{
+    background:#0066ff;
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* DEAD PIXEL SCREEN */
+
+#screen{
+    width:100vw;
+    height:100vh;
+    display:none;
+    cursor:pointer;
+}
+
+#info{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,0.6);
+    padding:10px 20px;
+    border-radius:10px;
+    font-size:14px;
+    z-index:100;
+    display:none;
+}
+
+/* KEYBOARD TEST */
+
+.keyboard-section{
+    display:none;
+    padding:40px 20px;
+    text-align:center;
+    min-height:100vh;
+}
+
+.keyboard-section h2{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.keyboard-section p{
+    color:#ccc;
+    margin-bottom:40px;
+}
+
+.keyboard{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:10px;
+}
+
+.key{
+    padding:20px;
+    background:#1d1d1d;
+    border:1px solid #333;
+    border-radius:10px;
+    transition:0.2s;
+    font-weight:bold;
+}
+
+.active{
+    background:#00ff99;
+    color:black;
+    transform:scale(1.05);
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:20px;
+    border-top:1px solid #333;
+    color:#888;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">
+Device Test Hub
+</div>
+
+<div class="creator">
+Created by Vidyanand Kamati
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<h1>Device Testing Website</h1>
+
+<p>
+Test your laptop, monitor, keyboard and display online for free.
+Use our advanced Dead Pixel Tester and Keyboard Test Tool easily on any device.
+</p>
+
+<div class="buttons">
+
+<button class="dead-btn" onclick="startDeadPixelTest()">
+Start Dead Pixel Test
+</button>
+
+<button class="keyboard-btn" onclick="openKeyboardTest()">
+Start Keyboard Test
+</button>
+
+</div>
+
+</section>
+
+<!-- DEAD PIXEL TEST -->
+
+<div id="screen"></div>
+
+<div id="info">
+Click / Space = Next Color | ESC = Exit
+</div>
+
+<!-- KEYBOARD TEST -->
+
+<section class="keyboard-section" id="keyboardSection">
+
+<h2>Keyboard Tester</h2>
+
+<p>
+Press any key on your keyboard to test if it is working properly.
+</p>
+
+<div class="keyboard" id="keyboard">
+
+<div class="key" data-key="Q">Q</div>
+<div class="key" data-key="W">W</div>
+<div class="key" data-key="E">E</div>
+<div class="key" data-key="R">R</div>
+<div class="key" data-key="T">T</div>
+<div class="key" data-key="Y">Y</div>
+<div class="key" data-key="U">U</div>
+<div class="key" data-key="I">I</div>
+<div class="key" data-key="O">O</div>
+<div class="key" data-key="P">P</div>
+
+<div class="key" data-key="A">A</div>
+<div class="key" data-key="S">S</div>
+<div class="key" data-key="D">D</div>
+<div class="key" data-key="F">F</div>
+<div class="key" data-key="G">G</div>
+<div class="key" data-key="H">H</div>
+<div class="key" data-key="J">J</div>
+<div class="key" data-key="K">K</div>
+<div class="key" data-key="L">L</div>
+
+<div class="key" data-key="Z">Z</div>
+<div class="key" data-key="X">X</div>
+<div class="key" data-key="C">C</div>
+<div class="key" data-key="V">V</div>
+<div class="key" data-key="B">B</div>
+<div class="key" data-key="N">N</div>
+<div class="key" data-key="M">M</div>
+<div class="key" data-key=" ">SPACE</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+© 2026 Device Test Hub | Created by Vidyanand Kamati
+</footer>
+
+<script>
+
+/* DEAD PIXEL TEST */
+
+const colors = [
+"#000000",
+"#FFFFFF",
+"#FF0000",
+"#00FF00",
+"#0000FF",
+"#FFFF00",
+"#00FFFF",
+"#FF00FF"
+];
+
+let current = 0;
+
+const screen = document.getElementById("screen");
+const info = document.getElementById("info");
+
+function startDeadPixelTest(){
+
+document.getElementById("home").style.display="none";
+document.getElementById("keyboardSection").style.display="none";
+
+screen.style.display="block";
+info.style.display="block";
+
+if(document.documentElement.requestFullscreen){
+document.documentElement.requestFullscreen();
+}
+
+changeColor();
+}
+
+function changeColor(){
+screen.style.background=colors[current];
+current=(current+1)%colors.length;
+}
+
+screen.addEventListener("click",changeColor);
+
+document.addEventListener("keydown",function(e){
+
+if(screen.style.display==="block"){
+
+if(e.code==="Space"){
+e.preventDefault();
+changeColor();
+}
+
+if(e.code==="Escape"){
+
+screen.style.display="none";
+info.style.display="none";
+
+document.getElementById("home").style.display="flex";
+}
+}
+
+});
+
+/* KEYBOARD TEST */
+
+function openKeyboardTest(){
+
+document.getElementById("home").style.display="none";
+
+document.getElementById("keyboardSection").style.display="block";
+}
+
+document.addEventListener("keydown",function(e){
+
+const key=e.key.toUpperCase();
+
+const target=document.querySelector(`[data-key="${key}"]`);
+
+if(target){
+
+target.classList.add("active");
+
+setTimeout(()=>{
+target.classList.remove("active");
+},300);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
